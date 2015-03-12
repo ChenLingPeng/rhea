@@ -1,0 +1,115 @@
+@(user: User, information: Map[String, Map[String,Tuple5[List[Project],List[Project],Long,Long,Long]]])(implicit request: Request[Any])
+
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <title>Dashboard | Rhea</title>
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/style.css")" >
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap-responsive.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/toastr.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/jquery.tooltip.css")">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    </head>
+    <body>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+
+                        <a class="btn btn-navbar" data-target=".navbar-responsive-collapse" data-toggle="collapse"></a>
+                        <div class="nav-collapse collapse navbar-responsive-collapse">
+                            <div class="container">
+                                <ul class="nav">
+                                    <li id="logo_pic">
+                                        <img src="@routes.Assets.at("images/logo.png")">
+                                    </li>
+
+                                    <li   class="active">
+                                        <a href="@routes.AdminApp.index()">统计查看</a>
+                                    </li>
+
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li class="user-name">@user.name</li>
+                                    <li class="modify-psw"><a href="@routes.UserApp.editpassword()" >修改密码</a></li>
+                                    <li>
+                                        <a href="@routes.Application.logout()">退出</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    @information.map{ groupmap =>
+                        <div class="page-header"><h1><small>@groupmap._1</small></h1></div>
+                        @groupmap._2.map{ usermap =>
+                            <div class="singleperson">
+                                <span class="single-name">@usermap._1</span>
+                                <span class="single-project">所参与项目：</span>
+                                @usermap._2._1.map{ project =>
+                                    <span class="single-proname"> @(project.name)</span><br/>
+
+                                }
+                                    @usermap._2._2.map{ project =>
+                                    <span class="single-proname"> @(project.name)</span><br/>
+
+                                }
+
+                                <span class="single-task">本周task总数：</span>
+                                <span class="single-tasknum">@(usermap._2._3+usermap._2._4+usermap._2._5)</span>
+                                <span class="single-finish">已完成task：</span>
+                                <span class="single-finishnum">@usermap._2._3</span>
+                                <span class="single-doing">进行中task：</span>
+                                <span class="single-doingnum">@usermap._2._4</span>
+                                <span class="single-todo">未开始task：</span>
+                                <span class="single-todonum">@usermap._2._5</span>
+                                <div class="page-header"></div>
+                            </div>
+
+
+                        }
+                    }
+                </div>
+            </div>
+
+        </div>
+
+
+        <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+        <script src="@routes.Assets.at("javascript/jquery.tooltip.js")"></script>
+        <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+        <script src="@routes.Assets.at("javascript/rhea.js")"></script>
+        <script>
+
+        var rhea = new rhea(@user.teamid,0,@user.id);
+        rhea.initlistCanEdit();
+        rhea.teamprojects();
+
+
+
+        </script>
+
+
+    </body>
+</html>

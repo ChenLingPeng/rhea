@@ -1,0 +1,106 @@
+@(user: User, users: List[User], othergroupusers: List[User], handler: security.MyDeadboltHandler)(implicit request: Request[Any])
+
+@import security._
+@import be.objectify.deadbolt.scala.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+
+@title(user){
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    @dynamic(handler, "", "createproject") {
+                        <div class="page-header">
+                            <h1>
+                                <small>新建project</small>
+                            </h1>
+                        </div>
+                        <div>
+                            <div>
+                                <h>项目负责人： </h>
+                                <select name="ownby" id ="ownby">
+                                @users.map { user =>
+                                    <option value="@user.id">@user.name</option>
+                                }
+
+                                </select>
+
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <span style="margin-bottom: 10px;">添加其他成员： </span>
+
+                                <select id='pre-selected-options' multiple='multiple' class="selectbox">
+                                @othergroupusers.map { user =>
+                                    <option value="@user.id">@user.name</option>
+                                }
+
+
+                                </select>
+
+                            </div>
+                            项目名称：<input type="text" name="projectname" id="projectname">
+                            <textarea class="span10" rows="5" placeholder="项目描述" id="projectdesc" name="description"></textarea>
+                            <button  class="btn btn-inverse" id="submit-project">提交</button>
+                        </div>
+
+                    }
+
+
+                    <div class="page-header">
+
+                        <h1>
+                            <small>项目列表</small>
+                        </h1>
+                    </div>
+                    <ul class="projects" id="projects">
+
+
+                    </ul>
+                    @*<ul id="nomore">
+
+                    </ul>*@
+                </div>
+                <div class="span4 " id="tasks">
+                    @*                    <div class="page-header">
+                    <h1>
+                    <small>项目列表</small>
+                    </h1>
+                    </div>
+                    <ul>
+                    <ul class="projects" id="projects">
+
+                    </ul>
+                    </ul>*@
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script src="@routes.Assets.at("javascript/rhea.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.multi-select.js")"></script>
+    <script>
+
+    var rhea = new rhea(@user.teamid,0,@user.id,@user.id);
+    rhea.teamsdetail();
+
+    $("#submit-project").click(function (event) {
+    rhea.createProject();
+    });
+    $('#pre-selected-options').multiSelect();
+
+
+
+    </script>
+    <script>
+    $('#listicon li' ).each(function(){
+    $(this ).removeClass('active');
+
+    });
+    $('.projectmenu' ).addClass('active');
+    </script>
+}
+

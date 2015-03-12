@@ -1,0 +1,444 @@
+h1{
+    font-family: '微软雅黑';
+}
+a:link { text-decoration: none;}
+.projects li{
+    list-style-type: none;
+    margin-bottom: 18px;
+}
+.projects .thumbnail{
+    cursor: pointer;
+}
+.projects .thumbnail:hover{
+    background-color: #dcdcdc;
+}
+.projects .project_name a{
+    font-size: 18px;
+    line-height: 30px;
+    color: darkolivegreen;
+
+
+}
+.icon-chevron-right{
+    float: right;
+    margin-top: 7px;
+}
+.page-header{
+    line-height: 25px;
+}
+.navbar-neotel{
+    background-color: #000000;
+    height: 40px;
+}
+.navbar-fluid{
+    background-color: #000000 !important;
+}
+#logo_pic  a img{
+    width: 30%;
+margin-left: 20%;
+    color: orangered;
+}
+.user-name{
+    color: #ffffff;
+    margin-top: 10px;
+    margin-right: 20px;
+
+}
+
+.modify-psw{
+    color: #ffffff;
+    margin-top: 10px;
+    margin-right: 20px;
+
+}
+
+.text-edit{
+margin-left: 70%;
+margin-top: -20px;
+
+}
+.text-edit span{
+    color: #ffffff;
+    margin-left: 5px;
+    display: inline-block;
+}
+#submit-task {
+    margin-top: 80px;
+    margin-left: 10px;
+}
+
+.author_name a{
+    color: dodgerblue;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.task_state{
+    margin-left: 10px;
+    color: lightseagreen;
+    margin-right: 10px;
+}
+
+#tasks li{
+    list-style-type:none;
+}
+.h-state{
+    margin-left: 20px;
+}
+.state-edit{
+position: absolute;
+    left:52%;
+margin-top: -10px!important;
+    font-weight: bold;
+}
+.reply-button{
+    position: absolute;
+    left:54%;
+  margin-top: 5px;
+
+}
+.reply-input{
+    margin-top: 10px;
+    width: 450px;
+}
+.delete-state{
+    position: absolute;
+    left:50%;
+    margin-top: 13px;
+}
+.drop-down{
+    height: 50px;
+    display: none;
+}
+.reply-down{
+
+    display: none;
+}
+.reply-submit{
+    position: absolute;
+    left: 54%;
+    margin-top: -25px;
+
+}
+.icon-edit{
+    cursor: pointer;
+}
+.edit-state{
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.summit-state{
+      position: absolute;
+    left: 45%;
+    margin-top: 13px;
+}
+.editstate-tip{
+    position: absolute;
+    left: 50%;
+    color: darkgreen;
+    margin-top: -33px;
+
+}
+.close-state{
+
+    position: absolute;
+    left: 40%;
+    margin-top: 13px;
+}
+.edit-statetext{
+    color: dodgerblue;
+    font-weight: bold;
+}
+.left-state{
+    width: 80%;
+}
+.left-state1{
+    width: 85%;
+}
+.date{
+margin-top: -10px;
+    float: right;
+}
+.modify-psw{
+margin-top: 0px;
+}
+.personal-change{
+    font-family: '微软雅黑';
+    font-size: 22px;
+    color: #999;
+    font-weight: normal;
+    margin-right: 50px;
+}
+.allstate-list{
+    float:right ;
+}
+.state-list{
+    float: right;
+}
+/*...................................showproject页面................................................*/
+.project-des{
+    margin-left: 10px;
+    font-size: 14px;
+}
+#projectdesc{
+    margin-left: 10px;
+    font-size: 14px;
+    color: #808080;
+    font-weight: bold;
+
+}
+.left-project{
+    float: left;
+    width: 60%;
+}
+.right-project{
+    float:left;
+    width: 40%;
+}
+.edit-pro{
+    display: none;
+    margin-top: 10px;
+}
+.task-show li{
+    list-style-type: none;
+}
+.projects  h1 small a{
+    color: #999;
+}
+.projects  h1 small a:hover{
+    color:#808080;
+}
+/*...................................editpassword页面................................................*/
+.edit-psw{
+    font-family:'微软雅黑';
+    color: darkgray;
+}
+.control-label{
+    padding-left: 33%;
+    margin-right: 5px;
+
+}
+.reset-psw{
+    margin-left: 45%;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+.confirm-psw{
+    margin-top: 20px;
+}
+/*....................................邮件页面......................................................*/
+
+.sendto{
+    height: 25px;
+    color: darkolivegreen;
+    font-weight: bold;
+}
+.sendto input{
+    height: 10px;
+    margin-top: 10px;
+
+}
+.copyto input{
+    height: 10px;
+    margin-top: 10px;
+}
+.secretto input{
+    height: 10px;
+    margin-top: 10px;
+}
+.copyto{
+    height: 25px;
+    color: darkolivegreen;
+    font-weight: bold;
+}
+.secretto{
+    height: 25px;
+    margin-bottom: 20px;
+    color: darkolivegreen;
+    font-weight: bold;
+}
+.workpage-text{
+    font-size: 20px;
+    color:darkslategray;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.workpage-header{
+    font-size: 18px;
+    color: dimgray;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.pageborder{
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+
+}
+.innerborder{
+    margin-left: 50px;
+    width: 50%;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.pageheader{
+    font-size: 14px;
+    color: darkolivegreen;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+.thumbnail{
+    margin-top: 30px;
+}
+.summit-page{
+margin-left: 46%;
+    margin-top: 30px;
+    margin-bottom: 100px;
+}
+.caption h3{
+    font-size: 14px;
+    color: darkgreen;
+}
+.caption li{
+    line-height: 20px;
+    font-size: 14px;
+
+
+}
+#num{
+    color: darkolivegreen;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 45%;
+}
+.change-text{
+    color: darkgrey;
+    font-size: 16px;
+}
+.contentarea{
+    height: 100px;
+}
+
+/***********************************************************creatpeoject****************************************/
+#ms-pre-selected-options{
+
+    margin-left: 8%!important;
+
+
+}
+#ms-pre-selected-options1{
+
+    margin-left: 20%!important;
+
+
+}
+#ms-pre-selected-options2{
+
+    margin-left: 20%!important;
+
+
+}
+#ms-pre-selected-options3{
+
+    margin-left: 20%!important;
+
+
+}
+/*********************************************************calculate页面*****************************************************/
+.single-name{
+    color: forestgreen;
+    font-weight: bold;
+    font-family: '微软雅黑';
+    font-size: 16px;
+    width: 10%!important;
+    margin-right: 20px;
+}
+.single-project {
+    color: 	#999;
+    position: absolute;
+    left: 20%;
+    font-weight: bold;
+}
+.single-proname {
+    position: absolute;
+    left: 26%;
+    color:darkolivegreen;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.single-tasknum{
+    color: 	#999;
+
+    font-weight: bold;
+}
+.single-task{
+    position: absolute;
+    left: 40%;
+    color: 	#999;
+
+    font-weight: bold;
+}
+.single-tasknum{
+    color: lightseagreen;
+    position: absolute;
+    left: 47%;
+    font-weight: bold;
+}
+.single-finish{
+    color: 	#999;
+
+    font-weight: bold;
+    position: absolute;
+    left: 52%;
+}
+.single-todo{
+    color: 	#999;
+    position: absolute;
+    left: 68%;
+    font-weight: bold;
+}
+.single-doing{
+    color: 	#999;
+    position: absolute;
+    left: 60%;
+    font-weight: bold;
+}
+
+.single-todonum{
+    color: lightseagreen;
+    position: absolute;
+    left: 74%;
+    font-weight: bold;
+}
+.single-doingnum{
+    color: lightseagreen;
+    position: absolute;
+    left: 66%;
+    font-weight: bold;
+}
+.single-finishnum{
+    color: lightseagreen;
+    position: absolute;
+    left: 58%;
+    font-weight: bold;
+}
+#editor {
+    max-height: 250px;
+    height: 250px;
+    background-color: white;
+    border-collapse: separate;
+    border: 1px solid rgb(204, 204, 204);
+    padding: 4px;
+    box-sizing: content-box;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+    box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset;
+    border-top-right-radius: 3px; border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px; border-top-left-radius: 3px;
+    overflow: scroll;
+    outline: none;
+}

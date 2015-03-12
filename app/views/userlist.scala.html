@@ -1,0 +1,38 @@
+@(user: User, groupUsers: Map[(Long, String), List[User]])(implicit request: Request[Any])
+
+@title(user){
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row-fluid">
+            @groupUsers.map{ groupmap =>
+                <div class="page-header"><h1><small>@groupmap._1._2</small></h1></div>
+            @groupmap._2.map{ user =>
+                <span class="singleperson">
+                    <span class="single-name"><a href="/others/@user.id">@user.name</a></span>
+            }
+            </span>
+            }
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.tooltip.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script src="@routes.Assets.at("javascript/rhea.js")"></script>
+    <script>
+    $('#listicon li' ).each(function(){
+    $(this ).removeClass('active');
+
+    });
+    $('.usermenu' ).addClass('active');
+    </script>
+}
+
+
+

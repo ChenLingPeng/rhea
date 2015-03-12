@@ -1,0 +1,42 @@
+@(user: User)
+
+@title(user){
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script>
+    $(document).ready(function() {
+    function jump(count) {
+    window.setTimeout(function(){
+    count--;
+    if(count > 0) {
+    $('#num').text(count);
+    jump(count);
+    } else {
+    location.href="@routes.Application.index()";
+    }
+    }, 1000);
+    }
+    jump(5);
+    });
+
+    </script>
+    <div class="container">
+        <div class="timeout">
+            <div class="page-header">
+                <h3 style="text-align: center;">发送成功</h3>
+
+            </div>
+            <span id="num">5</span>
+            <span class="change-text">秒后跳转到主页面</span>
+        </div>
+
+    </div>
+
+
+}
+
+
+
+
+
+
+

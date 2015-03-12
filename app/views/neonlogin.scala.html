@@ -1,0 +1,164 @@
+@(form: Form[(String, String)])
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Neon Admin Panel" />
+	<meta name="author" content="" />
+	
+	<title>RHea|个人登录</title>
+	<link rel="stylesheet" href="@routes.Assets.at("css/google.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("css/neon-core.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("css/neon-theme.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("css/neon-forms.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("css/custom.css")">
+
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+
+
+	<!--[if lt IE 9]>
+    <script src="@routes.Assets.at("javascript/ie8-responsive-file-warning.js")"></script>
+    <![endif]-->
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+<body class="page-body login-page login-form-fall" data-url="http://neon.dev">
+
+
+<!-- This is needed when you send requests via Ajax --><script type="text/javascript">
+var baseurl = '';
+</script>
+
+<div class="login-container">
+	
+	<div class="login-header login-caret">
+		
+		<div class="login-content">
+			
+			<a href="#" class="logo">
+				<img src="@routes.Assets.at("image/1.jpg")" width="180" alt="" class="img-circle"/>
+			</a>
+			
+			<p class="description" style="font-size: 20px;">亲爱的seeker，请登录</p>
+			
+			<!-- progress bar indicator -->
+			<div class="login-progressbar-indicator">
+				<h3>43%</h3>
+				<span>正在登录</span>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="login-progressbar">
+		<div></div>
+	</div>
+	
+	<div class="login-form">
+		
+		<div class="login-content">
+			
+			<div class="form-login-error">
+				<h3>用户名或密码错误</h3>
+
+			</div>
+			
+			<form method="post" role="form" id="" action="@routes.Application.authenticate()">
+				
+				<div class="form-group">
+					
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="entypo-user"></i>
+						</div>
+						
+						<input type="text" class="form-control" name="email" id="username" placeholder="邮箱名" autocomplete="off" value="@form("email").value"/>
+					</div>
+					
+				</div>
+				
+				<div class="form-group">
+					
+					<div class="input-group">
+						<div class="input-group-addon">
+							<i class="entypo-key"></i>
+						</div>
+						
+						<input type="password" class="form-control" name="password" id="password" placeholder="密码" autocomplete="off"  value="@form("password").value"/>
+					</div>
+				
+				</div>
+				
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary btn-block btn-login" style="text-align: center" onclick="SubmitForm()">
+						<i class="entypo-login"></i>
+						登录
+					</button>
+				</div>
+
+			</form>
+			
+			
+			<div class="login-bottom-links">
+				
+				<div class="btn btn-inverse link">忘记密码?</div>
+				
+				<br />
+				
+				<a href="#">neotel</a>  - <a href="#">北京新讯世纪有限公司</a>
+				
+			</div>
+			<script>
+                $(".link" ).click(function(){
+//                    var yourEmail = $("#username" ).val();
+//                    alert("请到"+yourEmail+"邮箱查收")
+//                    $.ajax({
+//                        type:'POST',
+//                        url:"/forgetPsw",
+//                        data:{yourEmail:yourEmail},
+//                        dataType:'json'
+//                    });
+                    window.location.href='@routes.UserApp.sendemail()';
+                })
+			</script>
+		</div>
+		
+	</div>
+	
+</div>
+
+
+	<!-- Bottom Scripts -->
+	@*<script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>*@
+    @*<script src="@routes.Assets.at("javascript/jquery-ui.js")"></script>*@
+	<script src="@routes.Assets.at("javascript/joinable.js")"></script>
+	<script src="@routes.Assets.at("javascript/resizeable.js")"></script>
+	<script src="@routes.Assets.at("javascript/neon-api.js")"></script>
+	<script src="@routes.Assets.at("javascript/jquery.validate.min.js")"></script>
+	<script src="@routes.Assets.at("javascript/neon-login.js")"></script>
+	<script src="@routes.Assets.at("javascript/neon-custom.js")"></script>
+	<script src="@routes.Assets.at("javascript/neon-demo.js")"></script>
+
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/md5.js")"></script>
+    <script>
+    SubmitForm = function () {
+    document.getElementById("password").value = md5(document.getElementById("password").value);
+    };
+    </script>
+
+	<script>!window.jQuery && document.write(unescape("%3Cscript src='http://hector.100101.cn/assets/download/jquery.min.js'%3E%3C/script%3E"));</script>
+	<script type="text/javascript" src="http://hector.100101.cn/assets/download/hector.js"></script>
+	<script type="text/javascript">var hector_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='hector_icon_5'%3E%3C/span%3E%3Cscript type='text/javascript'%3E sendData(5) %3C/script%3E"));
+	</script>
+
+
+</body>
+</html>

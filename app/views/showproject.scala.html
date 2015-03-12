@@ -1,0 +1,171 @@
+@(user: User, groupmembers: List[User], projectothers: List[User], allothers: List[User], projectid: Long, projectname: String, des: String, ownby: String, handler: security.MyDeadboltHandler)(implicit request: Request[Any])
+@import security._
+@import be.objectify.deadbolt.scala.views.html._
+@import be.objectify.deadbolt.core.utils.TemplateUtils._
+@title(user){
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span9">
+                    <div class="page-header">
+                        <h1>
+                            <small>@projectname 项目详情</small>
+                        </h1>
+                    </div>
+                    <div>
+
+                        <span>项目描述: </span>
+                        <span style="font-size: 14px;" id="projectdesc">@des</span>
+
+                        <div class="page-header">
+                            <h3>
+                                <small id="ownby">&nbsp;&nbsp;负责人&nbsp;&nbsp;：@ownby</small>
+                            </h3>
+                        </div>
+                    </div>
+                    <div >
+                    @dynamic(handler, projectid+"", "editproject"){
+                        <div class="btn btn-info" id="edit-pro">编辑项目资料</div>
+                        <div class="btn btn-info clearfix" id="delete-pro">删除项目</div>
+                        <div class="edit-pro">
+
+                            <div>
+                                <div>
+                                    <h>项目负责人： </h>
+                                    <select name="owner" id ="owner">
+                                    @groupmembers.map{member =>
+                                        <option value="@member.id">@member.name</option>
+                                    }
+
+
+                                    </select>
+
+                                </div>
+                                <p>项目状态:
+                                    <select name="pstate" id ="pstate">
+                                        <option value="1">正在进行</option>
+                                        <option value="3">已完成</option>
+                                    </select>
+                                </p>
+                                <p>组内成员： @groupmembers.map { user =>
+                                    <span>@user.name</span>
+                                }</p>
+
+
+                                <p>组外成员： @projectothers.map { user =>
+                                    <span>@user.name</span>
+                                }</p>
+
+                                <p>项目名称：@projectname</p>
+
+                                <div style="margin-bottom: 20px;">
+                                    <span style="margin-bottom: 20px;">编辑组外成员： </span>
+
+                                    <select id='pre-selected-options' multiple='multiple' class="selectbox">
+                                    @allothers.map { user =>
+                                        @if(projectothers.exists( _.id==user.id)) {
+                                            <option value="@user.id" selected>@user.name</option>
+                                        } else {
+                                            <option value="@user.id">@user.name</option>
+                                        }
+                                    }
+                                    </select>
+                                </div>
+                                <textarea class="span10" rows="5" placeholder="@des" id="editprojectdesc" name="description"></textarea>
+
+                                <button  class="btn btn-inverse" id="edit-project-submit">提交</button>
+                                <button  class="btn btn-inverse" id="edit-project-cancel">取消</button>
+                            </div>
+                        </div>
+
+                    }
+
+                    </div>
+
+
+                    <ul class="tasks task-show" >
+
+
+                    </ul>
+                    <ul class="nomore" id="nomore">
+
+                    </ul>
+                </div>
+
+                <div class="span3 " id="tasks">
+                    <div class="page-header">
+                        <h1>
+                            <small>项目列表</small>
+                        </h1>
+                    </div>
+                    <ul>
+                        <ul class="projects" id="projects">
+
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+            <div class="span4">
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery-impromptu.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.multi-select.js")"></script>
+    <script src="@routes.Assets.at("javascript/rhea.js")"></script>
+    <script>
+    $("#delete-pro" ).click(function(){
+    $.prompt("确定要删除项目吗？", {
+    title: "点击确定后项目将不再显示",
+    buttons: { "确定": 0},
+
+    submit:function(){
+
+    $.ajax({
+    type:'POST',
+    url:"/json/project/delete/"+@projectid,
+    success:function(data){
+    if(data==1){
+    toastr.success("删除项目成功");
+    setTimeout("window.location.href='@routes.ProjectApp.index()'",1000);
+    }else{
+
+    toastr.success("删除项目失败");
+    }
+    }
+    });
+    }
+    });
+    })
+    </script>
+    <script>
+    var rhea = new rhea(@user.teamid, @projectid, 0,@user.id);
+    rhea.init();
+
+    $(window).scroll(function(event){
+    rhea.scroll();
+    });
+    $('#edit-pro' ).click(function(){
+    $(".edit-pro" ).slideToggle();
+    });
+
+    $('#edit-project-submit' ).click(function(){
+    rhea.modifyProject(@projectid);
+    $(".edit-pro" ).slideToggle ();
+    });
+
+    $('#edit-project-cancel' ).click(function(){
+    $(".edit-pro" ).slideToggle ();
+    });
+
+
+    $('#pre-selected-options').multiSelect();
+    $("#editprojectdesc" ).val('@des');
+    </script>
+}
+

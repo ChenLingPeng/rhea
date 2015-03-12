@@ -1,0 +1,89 @@
+@(user: User, id: Long)
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")">
+        <style>
+        html, body {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        }
+
+        #ed-txt-area {
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+        box-sizing: border-box;
+        resize: vertical;
+        display: block;
+        padding: 9px;
+        font-size: 12px;
+        line-height: 1.42857143;
+        color: #333;
+        word-break: break-all;
+        word-wrap: break-word;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+        }
+
+        #banner {
+        text-align: center;
+        }
+        </style>
+
+    </head>
+    <body ng-app="showdownTest">
+        <div id="banner" class="jumbotron">
+            <h1>Markdown it!</h1>
+
+            <h3 id="titlesss">title here</h3>
+            <h5 id="cuser"></h5>
+            <h5 id="ctime"></h5>
+        </div>
+        <div class="container" data-ng-controller="shTestCtrl">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h2>HTML</h2>
+                    <div data-sd-model-to-html="mdText"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="@routes.Assets.at("javascript/showdown.js")"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascript/ng-showdown.js")"></script>
+        <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+        <script>
+        var shTest = angular.module('showdownTest', ['Showdown']);
+
+        shTest.controller('shTestCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        $http.post('/json/art/@id').then(
+                 function (data) {
+                     $("#titlesss").html(data.data.title);
+                 $("#cuser").html(data.data.user);
+                 $("#ctime").html(data.data.ctime);
+                   $scope.mdText = data.data.data;
+                 },
+                 function (error) {
+                   console.log(error);
+                 }
+        );
+        }]);
+        </script>
+
+        <script>!window.jQuery && document.write(unescape("%3Cscript src='http://hector.100101.cn/assets/download/jquery.min.js'%3E%3C/script%3E"));</script>
+        <script type="text/javascript" src="http://hector.100101.cn/assets/download/hector.js"></script>
+        <script type="text/javascript">var hector_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='hector_icon_5'%3E%3C/span%3E%3Cscript type='text/javascript'%3E sendData(5) %3C/script%3E"));
+        </script>
+
+
+    </body>
+</html>

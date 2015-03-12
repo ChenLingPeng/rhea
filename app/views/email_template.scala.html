@@ -1,0 +1,11 @@
+@(code: String, userid: Long, host: String)
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <h2 class="lead">亲爱的seeker，请点击下面链接确认重置密码，新密码为111111，建议您尽早修改密码</h2>
+        <p><a href="http://@host/validate/@userid/@code">http://@host/validate/@userid/@code</a></p>
+    </body>
+</html>

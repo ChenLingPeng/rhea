@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dashboard | Rhea</title>
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap-responsive.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/style.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/toastr.css")">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+        <style type="text/css">
+        body{background: #fff;}
+
+        </style>
+    </head>
+    <body>
+       <div class="container">
+           <div class="span5 offset3 page-header">
+
+               <h2 style="margin-left: 25%;font-family: '微软雅黑';font-weight: bold;">忘记了密码？</h2>
+           </div>
+           <div class="span5 offset3">
+               <span style="font-family: '微软雅黑';color: #808080;font-weight: bold;">请输入邮箱：</span>
+               <input type="text" id="inputEmail" placeholder="Email" style="margin-left: 10px;margin-top: 5px;">
+               <div style="line-height: 25px;margin-top: 20px;color: palevioletred;font-family: '微软雅黑'">此功能将会发送一个重置密码的邮件到输入的邮箱，即可重置密码。</div>
+               <div class="btn btn-info" id="send-email" style="margin-top: 20px;margin-left: 35%;">发送邮件</div>
+               <div class="text1" style='text-align: center;margin-top: 20px;'></div>
+           </div>
+
+       </div>
+        <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+        <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+        <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+        <script>
+            $('#send-email' ).click(function(){
+            var yourEmail = $("#inputEmail" ).val();
+
+               $.ajax({
+                    type:'POST',
+                    url:"/forgetPsw",
+                    data:{yourEmail:yourEmail},
+                    dataType:'json',
+                   success:function(data){
+                       if(data==1){
+                            toastr.success("邮件发送成功");
+
+                           var count=5;
+                           $(document).ready(function() {
+                               function jump(count) {
+                                   window.setTimeout(function(){
+                                       count--;
+                                       if(count > 0) {
+                                           $('#counts').text(count);
+                                           jump(count);
+                                       }
+                                       else {
+                                           location.href="/";
+                                       }
+                                   }, 1000);
+                               }
+                               jump(5);
+                             });
+                            var str1 ="<span class='counts' id='counts' style='margin-left: -10px;'>5</span>";
+                            str1+="<span class='change-text'>秒后跳转到登录页面</span>";
+                           $('.text1' ).append(str1);
+                       }
+                     else
+                       {
+                            toastr.error("该邮箱未通过系统认证");
+                       }
+                   }
+               });
+            })
+        </script>
+    </body>

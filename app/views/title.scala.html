@@ -1,0 +1,111 @@
+@(user: User)(content: Html)
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="utf-8">
+        <title>Dashboard | Rhea</title>
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap.min.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/style.css")" >
+        <link rel="stylesheet" href="@routes.Assets.at("css/multi-select.css")" >
+        <link rel="stylesheet" href="@routes.Assets.at("css/bootstrap-responsive.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/toastr.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("css/jquery.tooltip.css")">
+
+        <link rel="stylesheet" href="@routes.Assets.at("css/jquery-impromptu.css")">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    </head>
+    <body>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="navbar navbar-inverse">
+                    <div class="navbar-inner">
+
+                        <a class="btn btn-navbar" data-target=".navbar-responsive-collapse" data-toggle="collapse"></a>
+                        <div class="nav-collapse collapse navbar-responsive-collapse">
+                            <div class="container" >
+                                <ul class="nav" id="listicon">
+                                    <li id="logo_pic">
+                                        <a href="@routes.Application.index()"><img src="@routes.Assets.at("images/logo.png")"></a>
+                                    </li>
+
+                                    <li class="allmenu">
+                                        <a href="@routes.Application.index()">全部动态</a>
+                                    </li>
+                                    <li  class="personalmenu">
+                                        <a href="@routes.Application.personal()">个人主页</a>
+                                    </li>
+                                    <li class="projectmenu">
+                                        <a href="@routes.ProjectApp.index()">工程视图</a>
+                                    </li>
+                                    <li class="usermenu">
+                                        <a href="@routes.UserApp.listUsers()">用户列表</a>
+                                    </li>
+                                    <li class="calculatemenu">
+                                        <a href="@routes.Application.calculate()">统计查看</a>
+                                    </li>
+                                    <li class="dropdown dropmenu">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">周报</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="@routes.UserApp.workpage()">自动生成周报</a>
+                                            </li>
+                                            <li>
+                                                <a href="@routes.UserApp.setemail()">设置周报收件人</a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropmenu2">
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"> 博文系统(BETA)</a>
+                                        <ul class="dropdown-menu">
+
+
+
+                                            <li>
+                                                <a href="@routes.ArticleApp.list()">博文列表</a>
+                                            </li>
+                                            <li class="divider">
+                                            </li>
+                                            <li>
+                                                <a href="@routes.ArticleApp.edit()">写博文</a>
+                                            </li>
+
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="nav pull-right">
+                                    <li class="user-name">@user.name</li>
+                                    <li class="modify-psw"><a href="@routes.UserApp.editpassword()" >修改密码</a></li>
+                                    <li>
+                                        <a href="@routes.Application.logout()">退出</a>
+                                    </li>
+                                    <li class="divider-vertical">
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @content
+
+        <script>!window.jQuery && document.write(unescape("%3Cscript src='http://hector.100101.cn/assets/download/jquery.min.js'%3E%3C/script%3E"));</script>
+        <script type="text/javascript" src="http://hector.100101.cn/assets/download/hector.js"></script>
+        <script type="text/javascript">var hector_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='hector_icon_5'%3E%3C/span%3E%3Cscript type='text/javascript'%3E sendData(5) %3C/script%3E"));
+        </script>
+
+
+    </body>
+    </html>

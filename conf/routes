@@ -1,0 +1,69 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+GET         /                                 controllers.Application.index
+GET         /admin                            controllers.AdminApp.index
+
+GET         /showproject/:id                  controllers.Application.projectIndex(id: Long)
+GET         /personal                         controllers.Application.personal
+GET         /personalforext                   controllers.Application.personalforext
+GET         /calculate                        controllers.Application.calculate
+GET         /others/:userid                   controllers.Application.others(userid: Long)
+GET         /editpassword                     controllers.UserApp.editpassword
+GET         /workpage                         controllers.UserApp.workpage
+GET         /setemail                         controllers.UserApp.setemail
+GET         /listUsers                        controllers.UserApp.listUsers
+
+POST        /sendReport                       controllers.UserApp.sendReport
+
+POST        /forgetPsw                        controllers.UserApp.forgetPsw
+GET         /validate/:userid/:code           controllers.UserApp.validate(userid:Long, code: String)
+GET         /sendemail                        controllers.UserApp.sendemail
+
+GET         /login                            controllers.Application.login
+GET         /logout                           controllers.Application.logout
+
+POST        /login                            controllers.Application.authenticate
+
+
+GET         /project/list                     controllers.ProjectApp.index
+
+POST        /json/group/create                controllers.GroupApp.create
+
+POST        /json/project/list                controllers.ProjectApp.listByTeam()
+POST        /json/project/create              controllers.ProjectApp.create
+POST        /json/project/modify/:id          controllers.ProjectApp.modify(id: Long)
+POST        /json/project/delete/:id          controllers.ProjectApp.delete(id: Long)
+
+POST        /json/user/oldpassword            controllers.UserApp.oldpassword
+POST        /json/user/changepsw              controllers.UserApp.changepsw
+
+POST        /json/task/list                   controllers.TaskApp.list()
+POST        /json/task/create                 controllers.TaskApp.create()
+POST        /json/task/modify/:id             controllers.TaskApp.modify(id: Long)
+POST        /json/task/delete/:id             controllers.TaskApp.delete(id: Long)
+
+POST        /json/setEmail                    controllers.EmailSetApp.setEmail
+
+POST        /gitlab/webhook                   controllers.PicApp.gitlab()
+
+GET         /msg/:msg                         controllers.Application.msg(msg)
+
+POST        /json/reply/create/:taskid        controllers.ReplyApp.create(taskid)
+POST        /json/reply/list/:taskid          controllers.ReplyApp.listByTask(taskid)
+GET         /edit                             controllers.ArticleApp.edit()
+GET         /view/:id                         controllers.ArticleApp.view(id: Long)
+POST        /view2                            controllers.ArticleApp.view2()
+POST        /json/art/:id                     controllers.ArticleApp.art(id: Long)
+GET         /artlist                          controllers.ArticleApp.list()
+
+
+
+# Javascript Routing
+GET         /javascriptRoutes                 controllers.Application.javascriptRoutes
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file                     controllers.Assets.at(path="/public", file)
+
+GET         /webjars/*file                    controllers.WebJarAssets.at(file)

@@ -1,0 +1,126 @@
+@(user: User, donethisweek: Map[String, List[Task]], doingthisweek: Map[String, List[Task]], todonext: Map[String, List[Task]], doingnext: Map[String, List[Task]],helpcontent:String)
+
+<!doctype html>
+<html>
+    <meta charset="utf-8">
+    <body>
+
+
+
+
+        <div>
+            <div>
+                <div>
+                    <div><h1 style="font-size: 18px;color: dimgray;font-weight: bold;margin-bottom: 10px;text-align: center;">工作周报</h1></div>
+                    <div style="font-size: 20px;color:darkslategray;font-weight: bold;margin-bottom: 10px;">本周工作</div>
+                    <ul style="width: 900px;height: 400px;overflow-y: scroll;" >
+
+
+                                <div style="width: 400px;float: left;border: 1px;">
+                                    <h3 style="  font-size: 14px;color: darkgreen;">
+                                        本周已完成工作
+                                    </h3>
+
+                                    @donethisweek.map{tasksFromProject =>
+                                        @if(tasksFromProject._2.nonEmpty){<h5 style="margin-left: 20px;">@tasksFromProject._1</h5>}
+                                        <ol start="1">
+                                        @tasksFromProject._2.map{ task => <li>@task.description</li>}
+                                        </ol>                                    }
+
+                                </div>
+
+
+
+
+                                <div style="width: 400px;float: left;border: 1px;">
+                                    <h3 style="  font-size: 14px;color: darkgreen;">
+                                        进行中工作
+                                    </h3>
+
+                                    @doingthisweek.map{tasksFromProject =>
+                                        @if(tasksFromProject._2.nonEmpty){<h5 style="margin-left: 20px;">@tasksFromProject._1</h5>}
+                                        <ol start="1">
+                                        @tasksFromProject._2.map{ task => <li>@task.description</li>}
+                                        </ol>                                    }
+
+
+                                </div>
+
+
+
+                    </ul>
+                    <div style="font-size: 20px;
+                    color:darkslategray;
+                    font-weight: bold;
+                    margin-bottom: 10px;height: auto;">下周工作</div>
+                    <ul style="width: 900px;height: 300px;overflow-y: scroll;">
+
+
+
+                                <div style="width: 400px;float: left;border: 1px;">
+                                    <h3 style="font-size: 14px;color: darkgreen;">
+                                        未开始的工作
+                                    </h3>
+
+                                    @todonext.map{tasksFromProject =>
+                                        @if(tasksFromProject._2.nonEmpty){<h5 style="margin-left: 20px;">@tasksFromProject._1</h5>}
+                                        <ol start="1">
+                                        @tasksFromProject._2.map{ task => <li>@task.description</li>}
+                                        </ol>                                    }
+
+
+                                </div>
+
+
+
+
+
+                                    <div style="width: 300px;float: left;border: 1px;">
+                                        <h3 style="  font-size: 14px;color: darkgreen;">
+                                            在进行中的工作
+                                        </h3>
+
+                                        @doingnext.map{tasksFromProject =>
+                                            @if(tasksFromProject._2.nonEmpty){<h5 style="margin-left: 20px;">@tasksFromProject._1</h5>}
+                                            <ol start="1">
+                                            @tasksFromProject._2.map{ task => <li>@task.description</li>}
+                                            </ol>                                        }
+
+
+                                    </div>
+
+
+
+                    </ul>
+                    <div class="workpage-text" style="font-size: 20px;
+                    color:darkslategray;
+                    font-weight: bold;
+                    margin-bottom: 10px;height: auto;">遇到的困难和需要的帮助</div>
+                    <div id="helpcontent" class="thumbnail" height="100px" style="font-size: 14px;font-family: '微软雅黑',margin-top:10px;margin-left: 20px;font-weight: bold;margin-bottom: 20px">
+                        @helpcontent
+                    </div>
+                    <div class="workpage-text" style="font-size: 20px;
+                    color:darkslategray;
+                    font-weight: bold;
+                    margin-bottom: 10px;height: auto;">其他工作</div>
+                    <ul style="min-height:400px;height:auto;border: 1px solid #cccccc;
+                    -webkit-border-radius: 3px;
+                    -moz-border-radius: 3px;
+                    border-radius: 3px;">
+                    <div id="editor">
+                        _OTHERJOB_
+                    </div>
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+
+ <div style="height: 100px;"></div>
+
+
+    </body>
+    </html>

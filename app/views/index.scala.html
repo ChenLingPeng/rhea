@@ -1,0 +1,81 @@
+@(user: User)
+
+@title(user){
+    <div class="container">
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span9">
+                    <div class="page-header">
+                        <span class="personal-change">近期动态 </span>
+                        <span class="dropdown allstate-list">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="alltaskstate" data-toggle="dropdown">
+                                按状态筛选
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="alltaskstate">
+                                <li role="presentation"  value="0" ><a role="menuitem" tabindex="-1" href="#"> 全部</a></li>
+                                <li role="presentation"  value="1" ><a role="menuitem" tabindex="-1" href="#"> 未开始</a></li>
+                                <li role="presentation"  value="2"><a role="menuitem" tabindex="-1" href="#">进行中</a></li>
+                                <li role="presentation" value="3"><a role="menuitem" tabindex="-1" href="#" >已完成</a></li>
+
+                            </ul>
+                        </span>
+                    </div>
+                    <ul class="tasks" id="tasks">
+
+
+                    </ul>
+                    <ul id="nomore">
+
+                    </ul>
+                </div>
+                <div  class="span3">
+                    <div class="page-header"><h1><small>项目列表</small></h1></div>
+                    <ul class="projects" id="projects">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script src="@routes.Assets.at("javascript/rhea.js")"></script>
+    <script>
+    var rhea = new rhea(@user.teamid, 0, 0,@user.id);
+    rhea.init();
+
+
+    $(window).scroll(function(event){
+    rhea.scroll();
+    });
+    $('.allstate-list ul li ' ).click(function(){
+
+    $('.tasks' ).empty();
+
+    var stateid=$(this ).val();
+
+    rhea.initvalues(stateid);
+
+    rhea.initlist();
+
+
+    var text=$(this ).text();
+
+    $('#alltaskstate' ).text(text);
+    $('#alltaskstate' ).append('<b class="caret"></b>');
+
+    });
+    </script>
+    <script>
+        $('#listicon li' ).each(function(){
+            $(this ).removeClass('active');
+
+        });
+        $('.allmenu' ).addClass('active');
+    </script>
+}

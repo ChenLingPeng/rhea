@@ -1,0 +1,132 @@
+@(user: User, others: List[User], tousers: Set[Long], ccusers: Set[Long], bccusers: Set[Long])
+
+@title(user){
+    <div class="container">
+        <div class="span8 offset2 page-header">
+
+            <h2 style="margin-left: 35%;font-family: '微软雅黑';font-weight: bold;">设置周报收件人</h2>
+        </div>
+        <div class="span8 offset2">
+            <span style="font-family: '微软雅黑';color: #808080;font-weight: bold;">发送到：</span>
+            <select id='pre-selected-options1' multiple='multiple' class="selectbox">
+            @others.map { user =>
+                @if(tousers.contains(user.id)){
+                    <option value="@user.email" selected>@user.name</option>
+                } else {
+                    <option value="@user.email">@user.name</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="span8 offset2">
+            <span style="font-family: '微软雅黑';color: #808080;font-weight: bold;">抄送到：</span>
+            <select id='pre-selected-options2' multiple='multiple' class="selectbox">
+            @others.map { user =>
+                @if(ccusers.contains(user.id)){
+                    <option value="@user.email" selected>@user.name</option>
+                } else {
+                    <option value="@user.email">@user.name</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="span8 offset2">
+            <span style="font-family: '微软雅黑';color: #808080;font-weight: bold;">密送到：</span>
+            <select id='pre-selected-options3' multiple='multiple' class="selectbox">
+            @others.map { user =>
+                @if(bccusers.contains(user.id)){
+                    <option value="@user.email" selected>@user.name</option>
+                } else {
+                    <option value="@user.email">@user.name</option>
+                }
+            }
+            </select>
+        </div>
+        <div class="span8 offset2">
+            <div class="btn btn-info" id="set-email" style="margin-top: 20px;margin-left: 40%;">设置</div>
+            <div class="text1" style='text-align: center;margin-top: 20px;'></div>
+        </div>
+
+    </div>
+
+    <script src="@routes.Assets.at("javascript/jquery-1.11.1.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.tooltip.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap.min.js")"></script>
+    <script src="@routes.Assets.at("javascript/bootstrap-wysiwyg.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.hotkeys.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script src="@routes.Assets.at("javascript/jquery.multi-select.js")"></script>
+    <script src="@routes.Assets.at("javascript/toastr.js")"></script>
+    <script>
+    $('#pre-selected-options3').multiSelect();
+    $('#pre-selected-options1').multiSelect();
+    $('#pre-selected-options2').multiSelect();
+    </script>
+    <script>
+    $('#set-email' ).click(function() {
+    var sendnum = 0 ;
+    var copynum = 0 ;
+    var secretnum = 0 ;
+    var sendmem =[ ] ;
+    var copymem =[ ] ;
+    var secretmem =[ ] ;
+    var sendnonempty ;
+    var ccnonempty ;
+    var bccnonempty ;
+
+    $ ( '#pre-selected-options1 option:selected' ).each ( function ( ) {
+    sendmem[ sendnum ++ ] = $ ( this ).val ( ) ;
+    } ) ;
+
+    $ ( '#pre-selected-options2 option:selected' ).each ( function ( ) {
+    copymem[ copynum ++ ] = $ ( this ).val ( ) ;
+    } ) ;
+
+    $ ( '#pre-selected-options3 option:selected' ).each ( function ( ) {
+    secretmem[ secretnum ++ ] = $ ( this ).val ( ) ;
+    } ) ;
+
+    if ( sendnum == 0 ) {
+    sendnonempty = 0 ;
+    }
+    else {
+    sendnonempty = 1 ;
+    }
+    if ( copynum == 0 ) {
+    ccnonempty = 0 ;
+    }
+    else {
+    ccnonempty = 1 ;
+    }
+    if ( secretnum == 0 ) {
+    bccnonempty = 0 ;
+    }
+    else {
+    bccnonempty = 1 ;
+    }
+    $.ajax ( {
+    type : 'POST',
+    url : '/json/setEmail',
+    data : { sendemail : sendmem, copyemail : copymem, secretemail : secretmem, sendnonempty : sendnonempty, ccnonempty : ccnonempty, bccnonempty : bccnonempty },
+    dataType : 'json',
+    success : function ( data ) {
+    if(data == 1){
+    toastr.success ( "邮件收件人设置成功" ) ;
+    }else{
+    toastr.error ( "邮件收件人设置失败" ) ;
+    }
+
+    }
+    });
+    });
+    </script>
+    <script>
+    $('#listicon li' ).each(function(){
+    $(this ).removeClass('active');
+
+    });
+    $('.dropmenu' ).addClass('active');
+    </script>
+
+}
+
